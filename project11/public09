@@ -1,0 +1,45 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 9 (public09)
+#
+# Runs xargs.x in line-at-a-time mode, with the "mv" utility as its target
+# program, with its standard input coming from a file that is contained in
+# the project tarfile that has pairs of filenames.  The first file is
+# created by this test, then xargs.x runs "mv" to rename it for each line of
+# its standard input.  (Note that this test requires xargs.x to ensure that
+# each invocation of the target program finishes before the next run,
+# because each invocation uses the results of the previous one.)
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# Remove these files if they already exist (because this test could be run
+# more than once, and the program might have a bug and not remove them).
+# Note that "-e" tests whether a file exists in tcsh.
+if ((-e public09.file1) || (-e public09.file2) || (-e public09.file3) || \
+    (-e public09.file4)) then
+  rm -f public09.file?
+endif
+
+# now create a file with the first name above (its contents don't matter at
+# all)
+touch public09.file1
+
+# now use xargs.x to rename the several times, until its final name is the
+# last name above
+./xargs.x -i mv < public09.input
+
+if (!(-e public09.file4) || (-e public09.file1) || (-e public09.file2) || \
+     (-e public09.file3)) then
+  # error exit
+  echo "Problem!  Something didn't work right (either public09.file4 doesn't"
+  echo "exist, or one of public09.file1, public09.file2, or public09.file3"
+  echo "do exist)."
+  exit -1
+else
+  # normal exit
+  echo "Success!  Only public09.file4 exists, not any of public09.file1,"
+  echo "public09.file2, or public09.file3."
+  exit 0
+endif

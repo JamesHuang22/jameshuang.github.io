@@ -1,0 +1,24 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 18 (public18)
+#
+# Runs xargs.x in default mode with a nonexistent target program name; it
+# should exit with status 1 in this case.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+echo hello | ./xargs.x nonexistent-command
+
+# xargs.x should have returned 1
+if ($status == 1) then
+  # normal exit
+  echo "Success!  xargs.x exited with status 1 when the target program did not"
+  echo "exist."
+  exit 0
+else
+  # error exit
+  echo "Problem!  xargs.x did not exit with status 1 even though the target"
+  echo "program did not exist."
+endif

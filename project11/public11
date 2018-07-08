@@ -1,0 +1,30 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 11 (public11)
+#
+# Runs xargs.x in default mode, with no explicit target program (so
+# /bin/echo will be used), with several lines of data in its standard input,
+# and checks for memory leaks.  This is the same as the second public test,
+# other than running xargs.x under valgrind to check for memory leaks and
+# other memory problems.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# This command runs valgrind silently, throws away any output it produces,
+# and causes it to exit with exit code 0 only if xargs.x doesn't have any
+# memory problems.  Note we are not even examining the output that is
+# produced; in this test we are only concerned with memory problems.
+valgrind -q --leak-check=full --error-exitcode=100 \
+  ./xargs.x < public11.input >& /dev/null
+
+if ($status == 0) then
+  # normal exit
+  echo "Success!  xargs.x didn't have any memory problems."
+  exit 0
+else
+  # error exit
+  echo "Problem!  xargs.x had memory leaks or other memory problems."
+  exit -1
+endif

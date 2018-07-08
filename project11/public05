@@ -1,0 +1,37 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 5 (public05)
+#
+# Runs xargs.x in default mode, with "make" as its target program, with its
+# standard input coming from the output of the "ls" command.  "ls" is being
+# used to list (i.e., print to its standard output) the name of a makefile
+# that is included in the project tarfile.  Several arguments appear on the
+# command line of your program, to be used as arguments when "make" is run,
+# to test whether xargs.x is correctly passing its own command-line
+# arguments along to the target program.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# The invocation below should cause your program to run the command:
+#
+# make -q -s -f public05.Makefile
+#
+# which due should NOT build the first target in the makefile.  This is due
+# to the argument -q, which causes make to not run any commands.  (-s causes
+# make to not produce any output; we want to suppress any output that make
+# would generate, so it does not interfere with the output of this test.)
+
+ls public05.Makefile | ./xargs.x make -q -s -f
+
+if (-e public05-testprogram.x) then
+  # error exit
+  echo "Problem!  Something didn't work right; public05-testprogram.x was"
+  echo "created but it should not have been."
+  exit -1
+else
+  # normal exit
+  echo "Success!  public05-testprogram.x was not created, which is correct."
+  exit 0
+endif

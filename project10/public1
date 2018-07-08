@@ -1,0 +1,25 @@
+#!/bin/tcsh
+
+#
+# This test checks the output of your program on an input that has fewer
+# than 200 words.
+#
+
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# due to the behavior of tcsh (not explained in detail here) this setting is
+# needed to be able to properly detect whether the diff command below
+# succeeded
+unset anyerror
+
+./paper-length.x < document1 | diff -wi - public1.output
+
+if (!($status)) then
+  echo 'Success!'
+  exit 0
+else
+  echo ''
+  echo 'Failure!  (Output differed from expected output.)'
+  exit -1
+endif

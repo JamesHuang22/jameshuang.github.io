@@ -1,0 +1,15 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 6 (public06)
+#
+# Runs xargs.x in line-at-a-time mode, with no explicit target program (so
+# /bin/echo will be used), with one line of data in its standard input.
+# (Since the standard input only has one line the output will be the same as
+# if default mode was used, but this just tests whether line-at-a-time mode
+# works correctly in the simplest case.)
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+./xargs.x -i < public06.input

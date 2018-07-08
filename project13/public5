@@ -1,0 +1,33 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #13
+# Public test 5 (public5)
+#
+# Tests the program with two filenames on the command line, so two threads
+# will be created.  Each file has just a few numbers.  The files are the
+# same as for the second public test, so the results should be the same.
+# The difference is that this test runs
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+valgrind -q --leak-check=full --error-exitcode=100 \
+  ./sum-files-threaded.x public5a.input public5b.input
+
+if ($status == 0) then
+  # normal exit
+  echo "Success!  Your program didn't have any memory problems."
+  exit 0
+else
+  # error exit
+  echo
+  echo -n "Problem!  Your program had memory leaks OR other memory problems.  "
+  echo "Run the"
+  echo "command:"
+  echo
+  echo -n "valgrind --leak-check=full sum-files-threaded.x "
+  echo "public5a.input public5b.input"
+  echo
+  echo "to see what was wrong."
+  exit -1
+endif

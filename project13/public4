@@ -1,0 +1,19 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #13
+# Public test 4 (public4)
+#
+# Tests the program with 20 filenames on the command line, so 20 threads
+# will be created.  The files have many numbers.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+./sum-files-threaded.x public4a.input public4b.input public4c.input \
+                       public4d.input public4e.input public4f.input \
+                       public4g.input public4h.input public4i.input \
+                       public4j.input public4k.input public4l.input \
+                       public4m.input public4n.input public4o.input \
+                       public4p.input public4q.input public4r.input \
+                       public4s.input public4t.input
+

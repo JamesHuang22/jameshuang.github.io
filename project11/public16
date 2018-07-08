@@ -1,0 +1,30 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 16 (public16)
+#
+# Runs xargs.x in line-at-a-time mode to test its exit status for an
+# incorrect invocation of the target program (it should exit with status 1
+# when any invocation of the target program had a nonzero exit status; here
+# the fourth invocation should have a nonzero exit status).
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# Note we are not even examining the output that is produced (">& /dev/null
+# throws it away); in this test we are only concerned with the exit status
+# of xargs.x.  Note that the exit status of ls is 2 if some files given on
+# its command line didn't exist or couldn't be listed, which is the case
+# here.
+./xargs.x -i ls < public16.input >& /dev/null
+
+if ($status == 1) then
+  # normal exit
+  echo "Success!  xargs.x exited with status 1 when the target program"
+  echo "exited with nonzero status."
+  exit 0
+else
+  # error exit
+  echo "Problem!  xargs.x did not exit with status 1 even though the target"
+  echo "program exited with nonzero status."
+endif

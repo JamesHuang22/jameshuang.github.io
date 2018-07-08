@@ -1,0 +1,12 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #13
+# Public test 1 (public1)
+#
+# Tests the program with just one filename on the command line, meaning only
+# one thread will be created.  The file has just a few numbers.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+./sum-files-threaded.x public1.input

@@ -1,0 +1,14 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 2 (public02)
+#
+# Runs xargs.x in default mode, with no explicit target program (so
+# /bin/echo will be used), with several lines of data in its standard input
+# (which will all be joined and echoed on the same output line, which is the
+# effect of standard mode).
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+./xargs.x < public02.input

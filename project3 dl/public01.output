@@ -1,0 +1,7 @@
+add     R10 R11
+mul     R14 R14
+mod     R11 R12
+or      R16 R15
+eql     R13 R12
+gt      R16 R11
+ge      R11 R15

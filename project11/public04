@@ -1,0 +1,41 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 4 (public04)
+#
+# Runs xargs.x in default mode, with the "rm" utility as its target program,
+# with its standard input coming from the output of the "ls" command.  "ls"
+# is being used to list (i.e., print to its standard output) the names of
+# several files, which are first created by this test.  The names of the
+# files in the directory will all be joined and used as command-line
+# arguments to an invocation of rm (which is the effect of standard mode),
+# resulting in the files being removed.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# Remove these files if they already exist (because this test could be run
+# more than once, and the program might have a bug and not remove them).
+# Note that "-e" tests whether a file exists in tcsh.
+if ((-e public04.file1) || (-e public04.file3) || (-e public04.file5) || \
+    (-e public04.file7)) then
+  rm -f public04.file?
+endif
+
+# now create files with these names
+touch public04.file1 public04.file3 public04.file5 public04.file7
+
+# now use xargs.x to remove them
+ls public04.file? | ./xargs.x rm
+
+# now see whether any of them still exist (if so, it's an error)
+if ((-e public04.file1) || (-e public04.file3) || (-e public04.file5) || \
+    (-e public04.file)) then
+  # error exit
+  echo "Problem!  Something didn't work right and some files weren't removed."
+  exit -1
+else
+  # normal exit
+  echo "Success!  All files that were supposed to have been removed have been."
+  exit 0
+endif

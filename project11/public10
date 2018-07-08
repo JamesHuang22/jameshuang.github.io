@@ -1,0 +1,37 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 10 (public10)
+#
+# Runs xargs.x in line-at-a-time mode, with "touch" as its target program,
+# with its standard input coming from a file that is contained in the
+# project tarfile that has several words.  An argument (-c) appears on the
+# command line of your program, to be used as an argument when "touch" is
+# run, to test whether xargs.x is correctly passing its own command-line
+# arguments (other than -i) along to the target program.  The effect is that
+# files with the words as names should NOT be created, because the -c
+# argument to touch causes it to update the timestamps of existing files,
+# but not create any new files.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+# Remove these files if they already exist.  Note that "-e" tests whether a
+# file exists in tcsh.
+if ((-e parrots) || (-e eat) || (-e carrots)) then
+  rm -f parrots eat carrots
+endif
+
+./xargs.x -i touch -c < public10.input
+
+if ((-e parrots) || (-e eat) || (-e carrots)) then
+  # error exit
+  echo "Problem!  Something didn't work right; none of the files parrots,"
+  echo "eat, or carrots should have been created."
+  exit -1
+else
+  # normal exit
+  echo "Success!  None of the files parrots, eat, or carrots were created, as"
+  echo "expected."
+  exit 0
+endif

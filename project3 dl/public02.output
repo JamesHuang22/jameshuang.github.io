@@ -1,0 +1,5 @@
+neg     R15
+not     R13
+branch  0216
+syscall
+halt

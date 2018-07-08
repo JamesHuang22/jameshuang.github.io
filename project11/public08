@@ -1,0 +1,17 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #11
+# Public test 8 (public08)
+#
+# Runs xargs.x in line-at-a-time mode, with no explicit target program (so
+# /bin/echo will be used), with its standard input coming from the output of
+# the "ls" command.  "ls" is being used to list (i.e., print to its standard
+# output) the contents of a directory that contains several files (the
+# directory is in the project tarfile).  The names of the files in the
+# directory will be echoed one per output line (which is the effect of
+# line-at-a-time mode).
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+ls public03+08.directory | ./xargs.x -i

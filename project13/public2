@@ -1,0 +1,12 @@
+#!/bin/tcsh -f
+
+# CMSC 216, Fall 2017, Project #13
+# Public test 2 (public2)
+#
+# Tests the program with two filenames on the command line, so two threads
+# will be created.  Each file has just a few numbers.
+#
+# (c) Larry Herman, 2017.  You are allowed to use this code yourself, but
+# not to provide it to anyone else.
+
+./sum-files-threaded.x public2a.input public2b.input
